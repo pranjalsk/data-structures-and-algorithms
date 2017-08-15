@@ -3,6 +3,8 @@
 #### Description: 
 Consider that you are creating a simplified e-commerce system. The system consists of multiple chicken retailers (clients) and a single chicken farm (server). The system consists of the major components shown in the diagram below.
 
+![Image](https://github.com/pranjalsk/data-structures-and-algorithms/blob/master/multithreading%20in%20C%23/ChickenFarmApplication/ecom.JPG)
+
 #### An Operation Scenario of the e-commerce system is outlined below:
 (1) The ChickenFarm uses a pricing model to calculate the chicken price. If the new price is lower than the previous price, it emits an event and calls the event handlers in the retailers that have subscribed to the event.
 (2) A Retailer evaluates the price, generates an OrderObject (consisting of multiple values), and sends the order to the Encoder to convert the order object into a plain string.
