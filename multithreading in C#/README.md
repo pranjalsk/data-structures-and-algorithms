@@ -3,6 +3,8 @@
 #### Description: 
 Consider that you are creating a simplified e-commerce system. The system consists of multiple chicken retailers (clients) and a single chicken farm (server). The system consists of the major components shown in the diagram below.
 
+![Image](https://github.com/pranjalsk/data-structures-and-algorithms/blob/master/multithreading%20in%20C%23/ChickenFarmApplication/ecom.JPG)
+
 #### An Operation Scenario of the e-commerce system is outlined below:
 (1) The ChickenFarm uses a pricing model to calculate the chicken price. If the new price is lower than the previous price, it emits an event and calls the event handlers in the retailers that have subscribed to the event.
 (2) A Retailer evaluates the price, generates an OrderObject (consisting of multiple values), and sends the order to the Encoder to convert the order object into a plain string.
@@ -22,9 +24,9 @@ in the diagram are explained in details as follows, with their grades allocation
 3. OrderProcessing is a class or a method in a class on server side. Whenever an order needs to be processed, a new thread is instantiated from this class (or method) to process the order. It will check the validity of the credit card number. You can define your own credit card format, for example, the credit card number from the retailers must be a number registered to the ChickenFarm, or a number between two given numbers (e.g., between 5000 and 7000). Each OrderProcessing thread will calculate the total amount of charge, e.g., unitPrice*NoOfChickens + Tax + shippingHandling. It will send a confirmation to the retailer when an order is completed. The confirmation must be implemented using a callback method
 4. Retailer1 through RetailerN, where N = 5, each retailer is a thread instantiated from the same class (or the same method) in a class. The retailers’ actions are event-driven. Each retailer contains a callback method (event handler) for the ChickenFarm to call when a price-cut event occurs. The retailer will calculate the number of chickens to order, for example, based on the need and the difference between the previous price and the current price. The thread will terminate after the ChickenFarm thread has terminated. Each order is an OrderClass object. The object is sent to the Encoder for encoding. The encoded string is sent back to the retailer. Then, the retailer will send the order in String format to the MultiCellBuffer. Before sending the order to the MultiCellBuffer, a time stamp must be saved. When the confirmation of order completion is received, the time of the order will be calculated and saved (or printed). 
 5. OrderClass is a class that contains at least the following private data members:
- senderId: the identity of the sender, you can use thread name or thread id;
- cardNo: an integer that represents a credit card number;
- amount: an integer that represents the number of chickens to order;
+-- senderId: the identity of the sender, you can use thread name or thread id;
+-- cardNo: an integer that represents a credit card number;
+-- amount: an integer that represents the number of chickens to order;
 You must use public methods to set and get the private data members. You must decide if these methods need to be synchronized. The instances created from this class are of the OrderObject. 
 6. MultiCellBuffer class is used for sending the order from the retailers (clients) to the chickenFarm (server). This class has n data cells (you can simply set n = 2). The number of cells is less than the max number N (you can set N = 5 or enter N from keyboard) of retailers in your experiment. A setOneCell and
 getOneCell methods can be defined to write data into and to read data from one of the available cells. You must use a semaphore of value n to manage the cells and use a lock for each cell to ensure the synchronization.
