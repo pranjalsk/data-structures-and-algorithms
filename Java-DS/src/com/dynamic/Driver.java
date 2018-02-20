@@ -14,7 +14,7 @@ public class Driver {
 		
 		Subsequences.longestIncreasingSubsequence(new int []{0,4,12,2,10,6,9,13,3,11,7,15});
 		
-		DynamicProblems.minCombinationsCoins(new int []{1,2,5},13);
+		DynamicProblems.minCombinationsCoins(new int []{1,2,5},5);
 	}
 
 }
