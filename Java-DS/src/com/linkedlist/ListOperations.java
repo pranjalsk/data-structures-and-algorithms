@@ -179,152 +179,229 @@ public class ListOperations {
 		head = prev;
 		return head;
 	}
-	
-	//intersection of two lists
+
+	// intersection of two lists
 	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-	    ListNode p1 = headA, p2 = headB;
-	    int len1 = 0, len2 = 0;
-	    while (p1 != null) {
-	        p1 = p1.next;
-	        len1++;
-	    }
-	    while (p2 != null) {
-	        p2 = p2.next;
-	        len2++;
-	    }
-	    p1 = headA;
-	    p2 = headB;
-	    if (len1 > len2) {
-	        for (int i = 0;i < len1 - len2; i++) {
-	            p1 = p1.next;
-	        }
-	    } else {
-	        for (int i = 0;i < len2 - len1; i++) {
-	            p2 = p2.next;
-	        }
-	    }
-	    while (p1 != p2) {
-	        p1 = p1.next;
-	        p2 = p2.next;
-	    }
-	    return p1;
+		ListNode p1 = headA, p2 = headB;
+		int len1 = 0, len2 = 0;
+		while (p1 != null) {
+			p1 = p1.next;
+			len1++;
+		}
+		while (p2 != null) {
+			p2 = p2.next;
+			len2++;
+		}
+		p1 = headA;
+		p2 = headB;
+		if (len1 > len2) {
+			for (int i = 0; i < len1 - len2; i++) {
+				p1 = p1.next;
+			}
+		} else {
+			for (int i = 0; i < len2 - len1; i++) {
+				p2 = p2.next;
+			}
+		}
+		while (p1 != p2) {
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+		return p1;
 	}
-	
-	
-	//Detect cycle----------------------------
+
+	// Detect cycle----------------------------
 	public boolean hasCycle(ListNode head) {
-	     
-        if(head == null) return false;
-        if(head.next == null) return false;
-        
-        ListNode slow = head;
-	    ListNode fast = head;
-	    
-	    while(fast.next !=null && fast.next.next != null){
-	    	slow = slow.next;
-	        fast = fast.next.next;
-	        if(slow == fast){
-	            return true;
-	        }
-	    }
-	    return false; //no loop
-    }
-	
-	public ListNode detectAndRemove(ListNode head){
-		
-		if(head == null) return head;
-        if(head.next == null) return head;
-        
-        ListNode slow = head;
-	    ListNode fast = head;
-	    
-	    while(fast.next !=null && fast.next.next != null){
-	    	slow = slow.next;
-	        fast = fast.next.next;
-	        if(slow == fast){
-	            break;
-	        }
-	    }
-	    
-	    if(slow == fast){
-	    	slow = head;
-	    	//move both pointer at equal speed
-	    	while(slow.next != fast.next){
-	    		slow = slow.next;
-	    		fast = fast.next;
-	    	}
-	    	//fast.next and slow.next points to intersection point
-	    	//disconnect it
-	    	fast.next = null;
-	    }
-	    
+
+		if (head == null)
+			return false;
+		if (head.next == null)
+			return false;
+
+		ListNode slow = head;
+		ListNode fast = head;
+
+		while (fast.next != null && fast.next.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if (slow == fast) {
+				return true;
+			}
+		}
+		return false; // no loop
+	}
+
+	public ListNode detectAndRemove(ListNode head) {
+
+		if (head == null)
+			return head;
+		if (head.next == null)
+			return head;
+
+		ListNode slow = head;
+		ListNode fast = head;
+
+		while (fast.next != null && fast.next.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if (slow == fast) {
+				break;
+			}
+		}
+
+		if (slow == fast) {
+			slow = head;
+			// move both pointer at equal speed
+			while (slow.next != fast.next) {
+				slow = slow.next;
+				fast = fast.next;
+			}
+			// fast.next and slow.next points to intersection point
+			// disconnect it
+			fast.next = null;
+		}
+
 		return head;
 	}
-	
-	//----Palindrome of list---------
-	public boolean ispalim(){
+
+	// ----Palindrome of list---------
+	public boolean ispalim() {
 		return isPalindrome(head);
 	}
+
+	public boolean isPalindrome(ListNode head) {
+		if (head == null || head.next == null)
+			return true;
+
+		// find mid point
+		ListNode slow = head, fast = head;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		ListNode newHead;
+		// now slow points to midpoint
+		if (fast == null) { // even case
+			newHead = slow;
+		} else {
+			newHead = slow.next;
+		}
+
+		ListNode revHead = reverseList(newHead);
+
+		ListNode ptr1 = head;
+		ListNode ptr2 = revHead;
+
+		while (ptr2 != null) {
+			if (ptr1.val != ptr2.val) {
+				return false;
+			}
+			ptr1 = ptr1.next;
+			ptr2 = ptr2.next;
+		}
+		return true;
+	}
+
+	/*
+	 * Add two lists of non neg integers Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+	 * Output: 7 -> 0 -> 8 Explanation: 342 + 465 = 807.
+	 */
+	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+		if (l1 == null)
+			return l2;
+		if (l2 == null)
+			return l1;
+
+		ListNode head = new ListNode(0);
+		ListNode p = head;
+
+		int tempSum = 0;
+		while (l1 != null || l2 != null || tempSum != 0) {
+			if (l1 != null) {
+				tempSum += l1.val;
+				l1 = l1.next;
+			}
+			if (l2 != null) {
+				tempSum += l2.val;
+				l2 = l2.next;
+			}
+
+			p.next = new ListNode(tempSum % 10);
+			p = p.next;
+			tempSum = tempSum / 10;
+		}
+		return head.next;
+	}
+
+	/**
+	 * SWAP in PAIRS Given a linked list, swap every two adjacent nodes and
+	 * return its head. For example, Given 1->2->3->4, you should return the
+	 * list as 2->1->4->3.
+	 */
+	public ListNode swapPairs(ListNode head) {
+		if (head == null || head.next == null)
+			return head;
+
+		// a fake head
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+
+		ListNode prev = dummy;
+		ListNode curr = head;
+		ListNode nextNode = curr.next;
+
+		while (curr != null && nextNode != null) {
+
+			ListNode tempNode = nextNode.next;
+			prev.next = nextNode;
+			nextNode.next = curr;
+			prev = curr;
+			curr.next = tempNode;
+
+			curr = curr.next;
+
+			if (tempNode != null)
+				nextNode = tempNode.next;
+		}
+
+		return dummy.next;
+	}
+
 	
-    public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null) return true;
-        
-        //find mid point
-        ListNode slow = head, fast = head;
-        while(fast != null && fast.next != null){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        
-        ListNode newHead;
-        //now slow points to midpoint
-        if(fast == null){ //even case
-            newHead =slow;
-        }else{
-            newHead = slow.next;
-        }
-        
-        ListNode revHead = reverseList(newHead);
-        
-        ListNode ptr1 = head;
-        ListNode ptr2 = revHead;
-        
-        while(ptr2!=null){
-            if(ptr1.val != ptr2.val){
-                return false;
-            }
-            ptr1 = ptr1.next;
-            ptr2 = ptr2.next;
-        }
-        return true;
+	
+	//find max in list
+	public int findMax(){
+		return maxValue(head);
+	}
+	
+	public int maxValue(ListNode head){
+		
+		if(head == null) throw new IllegalArgumentException();
+		if(head.next == null) return head.val;
+		
+		ListNode curr = head;
+		int max = curr.val;
+		while(curr != null){
+			max = Math.max(max, curr.val);
+			curr = curr.next;
+		}
+		
+		return max;
+	}
+	
+	
+	//Print reverse linkedlist RECCURSIVELY
+	public void printInRev(){
+		printRev(head);
+	}
+	
+	public void printRev(ListNode head){
+		ListNode curr = head;
+		if(curr==null)
+            return;
+        printRev(curr.next);
+        System.out.print(curr.val+" ");
     }
-    /*
-     * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-			Output: 7 -> 0 -> 8
-		Explanation: 342 + 465 = 807.
-     */
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if(l1==null) return l2;
-        if(l2==null) return l1;
-        
-        ListNode head = new ListNode(0);
-        ListNode p = head;
-        
-        int tempSum = 0;
-        while(l1!=null || l2!=null || tempSum!=0) {
-            if(l1!=null) {
-                tempSum += l1.val;
-                l1 = l1.next;
-            }
-            if(l2!=null) {
-                tempSum += l2.val;
-                l2 = l2.next;
-            }
-            
-            p.next = new ListNode(tempSum%10);
-            p = p.next;
-            tempSum = tempSum/10;
-        }
-        return head.next;
-    }
+	
 }

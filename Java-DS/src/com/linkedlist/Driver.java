@@ -12,7 +12,7 @@ public class Driver {
 		ops.add(new ListNode(15));
 		ops.add(new ListNode(78));
 		ops.add(new ListNode(14));
-		ops.add(new ListNode(1));
+		ops.add(new ListNode(112));
 		
 /*		//palimdrome
 		ops.add(new ListNode(12));
@@ -28,9 +28,13 @@ public class Driver {
 		System.out.print("\nSize: "+ops.getSize());
 		System.out.println();
 			
+		System.out.println("Max elem: "+ ops.findMax());
+		
+		ops.printInRev();
+		
 		//ops.sortedList();
 		
-		ops.delNode(1);
+		//ops.delNode(1);
 	
 	}
 }
