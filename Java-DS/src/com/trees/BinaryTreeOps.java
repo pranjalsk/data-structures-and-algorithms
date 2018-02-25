@@ -216,10 +216,11 @@ class BinaryTree {
 
 	// --------------------LEVEL TRAVERSAL-----------------------------
 	public void levelOrder() {
-		int ht = heightTree(root);
+		/*int ht = heightTree(root);
 		for (int i = 0; i < ht + 1; i++) {
 			breadthWiseTraversal(root, i);
-		}
+		}*/
+		System.out.println(levelOrder(root));
 	}
 
 	public void breadthWiseTraversal(TreeNode node, int level) {
@@ -723,9 +724,11 @@ public class BinaryTreeOps {
 
 		System.out.println("Tree Hight:" + obj.height());
 
-		System.out.print("Level order: ");
+		System.out.print("Level order:*** ");
 		obj.levelOrder();
 
+
+		
 		System.out.println("\nKth(3) Smallest is:" + obj.kthSmallestCaller(3));
 
 		System.out.println("Is valid BST: " + obj.isValidBSTCaller());

@@ -8,6 +8,23 @@ public class ArrayOperations {
 
 	}
 
+	// 2nd largest element
+	public int secondLargest(int[] A) {
+		int highest = 0;
+		int second_highest = 0;
+
+		for (int n : A) {
+			if (highest < n) {
+				second_highest = highest;
+				highest = n;
+
+			} else if (second_highest < n) {
+				second_highest = n;
+			}
+		}
+		return second_highest;
+	}
+
 	public String countAndSay(int n) {
 		String curr = "1";
 		for (int i = 1; i < n; i++) {
@@ -24,23 +41,6 @@ public class ArrayOperations {
 			curr = temp;
 		}
 		return curr;
-	}
-
-	public String longestCommonPrefix(String[] strs) {
-		if (strs == null || strs.length == 0)
-			return "";
-		StringBuilder prefix = new StringBuilder();
-
-		for (int i = 0; i < strs[0].length(); i++) {
-			char c = strs[0].charAt(i);
-			for (String str : strs) {
-				if (str.length() < i + 1 || c != str.charAt(i)) {
-					return prefix.toString();
-				}
-			}
-			prefix.append(c);
-		}
-		return prefix.toString();
 	}
 
 	public int reverseInteger(int n) {
@@ -185,6 +185,30 @@ public class ArrayOperations {
 		 */
 	}
 
+	// Find the Duplicate Number
+	/**
+	 * Given an array nums containing n + 1 integers where each integer is
+	 * between 1 and n (inclusive), prove that at least one duplicate number
+	 * must exist. Assume that there is only one duplicate number, find the
+	 * duplicate one.
+	 */
+	public int findDuplicate(int[] nums) {
+
+		HashSet<Integer> hs = new HashSet<>();
+		int hssum = 0;
+		int sum = 0;
+		for (int num : nums) {
+			if (!hs.contains(num)) {
+				hs.add(num);
+				hssum += num;
+			}
+			sum += num;
+		}
+
+		return (sum - hssum) / (nums.length - hs.size());
+
+	}
+
 	// ###IMP: Given an array nums, write a function to move all 0's to the end
 	// of
 	// it while maintaining the relative order of the non-zero elements.
@@ -222,7 +246,7 @@ public class ArrayOperations {
 	// Merge Sorted Array
 	// Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1
 	// as one sorted array.
-	public void merge(int[] nums1, int m, int[] nums2, int n) {
+	public void mergeSortedArrays(int[] nums1, int m, int[] nums2, int n) {
 		int i = m - 1;
 		int j = n - 1;
 		int k = m + n - 1;
@@ -230,10 +254,12 @@ public class ArrayOperations {
 		while (j >= 0 && i >= 0) {
 			if (nums1[i] >= nums2[j]) {
 				nums1[k] = nums1[i];
-				i--;k--;
+				i--;
+				k--;
 			} else {
 				nums1[k] = nums2[j];
-				j--;k--;
+				j--;
+				k--;
 			}
 		}
 
