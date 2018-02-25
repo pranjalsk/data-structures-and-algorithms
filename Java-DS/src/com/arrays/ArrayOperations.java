@@ -1,8 +1,6 @@
 package com.arrays;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class ArrayOperations {
 
@@ -82,7 +80,8 @@ public class ArrayOperations {
 		return -1;
 	}
 
-	// Fibonacci Sum advanced: How many minimum numbers from fibonacci series are
+	// Fibonacci Sum advanced: How many minimum numbers from fibonacci series
+	// are
 	// required such that sum of numbers should be equal to a given Number N
 	public int fibSum(int A) {
 
@@ -116,8 +115,7 @@ public class ArrayOperations {
 		return count;
 	}
 
-	
-	//Find peak element in an array
+	// Find peak element in an array
 	public int getPeakElement(int[] arr) {
 
 		if (arr == null || arr.length == 0)
@@ -143,32 +141,306 @@ public class ArrayOperations {
 		return 0;
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// Fizzbuzz
+	public List<String> fizzBuzz(int n) {
+
+		List<String> result = new ArrayList<>();
+
+		for (int i = 1; i <= n; i++) {
+			if (i % 3 == 0 && i % 5 == 0) {
+				result.add("FizzBuzz");
+			} else if (i % 3 == 0) {
+				result.add("Fizz");
+			} else if (i % 5 == 0) {
+				result.add("Buzz");
+			} else {
+				result.add(String.valueOf(i));
+			}
+		}
+		return result;
+
+	}
+
+	// Given an array of integers, every element appears twice except for one.
+	// Find that single one.
+	public int singleNumber(int[] nums) {
+		int sum = 0;
+		int hsSum = 0;
+		HashSet<Integer> hs = new HashSet<>();
+
+		for (int num : nums) {
+			if (!hs.contains(num)) {
+				hs.add(num);
+				hsSum += num;
+			}
+			sum += num;
+		}
+
+		return (2 * hsSum) - sum;
+
+		/*
+		 * int result = 0; for (int i = 0; i<n; i++) { result ^=A[i]; } return*
+		 * result;
+		 */
+	}
+
+	// ###IMP: Given an array nums, write a function to move all 0's to the end
+	// of
+	// it while maintaining the relative order of the non-zero elements.
+	public void moveZeroes(int[] A) {
+		int j = 0;
+		for (int i = 0; i < A.length; i++) {
+			if (A[i] != 0) {
+				swap(A, i, j);
+				j++;
+			}
+		}
+	}
+
+	// ##IMP: Remove Duplicates from Sorted Array
+	public int removeDuplicates(int[] A) {
+
+		int j = 0, count = 0;
+		for (int i = 1; i < A.length; i++) {
+			if (A[i] != A[j]) {
+				j++;
+				swap(A, i, j);
+				count++;
+			}
+		}
+		return count + 1; // because count represents last index
+	}
+
+	// ---------
+	public void swap(int[] A, int i, int j) {
+		int temp = A[i];
+		A[i] = A[j];
+		A[j] = temp;
+	}
+
+	// Merge Sorted Array
+	// Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1
+	// as one sorted array.
+	public void merge(int[] nums1, int m, int[] nums2, int n) {
+		int i = m - 1;
+		int j = n - 1;
+		int k = m + n - 1;
+
+		while (j >= 0 && i >= 0) {
+			if (nums1[i] >= nums2[j]) {
+				nums1[k] = nums1[i];
+				i--;k--;
+			} else {
+				nums1[k] = nums2[j];
+				j--;k--;
+			}
+		}
+
+		while (j >= 0) {
+			nums1[k] = nums2[j];
+			j--;
+			k--;
+		}
+
+		while (i >= 0) {
+			nums1[k] = nums1[i];
+			i--;
+			k--;
+		}
+	}
+
+	// Add two numbers without +
+	public int getSum(int a, int b) {
+		if (a == 0)
+			return b;
+		if (b == 0)
+			return a;
+
+		int carry = 0;
+		while (b != 0) {
+			carry = a & b;
+			a = a ^ b;
+			b = carry << 1;
+		}
+
+		return a;
+	}
+
+	// AB -> 28
+	public int excelTitleToNumber(String s) {
+		int sum = 0;
+		for (int i = s.length() - 1; i >= 0; i--) {
+			// System.out.println((i-(s.length()-1)));
+			// System.out.println((s.charAt(i)-'A')+1);
+
+			// Formula= CBA = (26^2 * 3) + (26^1 * 2) + (26^0 * 1)
+
+			sum = sum + ((int) Math.pow(26, ((s.length() - 1) - i)) * ((s.charAt(i) - 'A') + 1));
+		}
+		return sum;
+
+	}
+
+	// Contains Duplicate
+	// Given an array of integers, find if the array contains any duplicates.
+	// Your function should return true if any value appears at least twice in
+	// the array, and it should return false if every element is distinct.
+	public boolean containsDuplicate(int[] nums) {
+
+		if (nums.length == 0)
+			return false;
+		HashSet<Integer> hs = new HashSet<>();
+		for (int num : nums) {
+			if (!hs.contains(num)) {
+				hs.add(num);
+			}
+		}
+		return (hs.size() != nums.length);
+
+		/*
+		 * Arrays.sort(nums);
+		 * 
+		 * for(int i=1;i<nums.length;i++){ if(nums[i] == nums[i-1]){ return
+		 * true; } } return false;
+		 */
+
+	}
+
+	// Given an array containing n distinct numbers taken from 0, 1, 2, ..., n,
+	// find the one that is missing from the array.
+	public int missingNumber(int[] nums) {
+		int n = nums.length;
+		int sumOfAll = (n * (n + 1)) / 2;
+
+		int sumOfArr = 0;
+		for (int num : nums) {
+			sumOfArr += num;
+		}
+		return (sumOfAll - sumOfArr);
+	}
+
+	/*
+	 * Given two arrays, write a function to compute their intersection.
+	 * Example: Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2]. Note:
+	 * Each element in the result should appear as many times as it shows in
+	 * both arrays. The result can be in any order.
+	 */
+	// Aprroach1
+	public ArrayList<Integer> intersectApproach1(int[] nums1, int[] nums2) {
+		ArrayList<Integer> result = new ArrayList<>();
+
+		HashMap<Integer, Integer> map = new HashMap<>();
+
+		for (int num : nums1) {
+			if (!map.containsKey(num)) {
+				map.put(num, 1);
+			} else {
+				int val = map.get(num);
+				map.put(num, val + 1);
+			}
+		}
+
+		for (int num : nums2) {
+			if (map.containsKey(num) && map.get(num) > 0) {
+				result.add(num);
+				int val = map.get(num);
+				map.put(num, val - 1);
+			}
+		}
+		return result;
+	}
+
+	// Appraoch2
+	public ArrayList<Integer> intersectApproach2(int[] nums1, int[] nums2) {
+		Arrays.sort(nums1);
+		Arrays.sort(nums2);
+
+		int i = 0;
+		int j = 0;
+		ArrayList<Integer> result = new ArrayList<>();
+
+		while (i < nums1.length && j < nums2.length) {
+			if (nums1[i] == nums2[j]) {
+				result.add(nums1[i]);
+				i++;
+				j++;
+			} else if (nums1[i] < nums2[j]) {
+				i++;
+			} else if (nums1[i] > nums2[j]) {
+				j++;
+			}
+		}
+		return result;
+	}
+
+	// Given an integer, write a function to determine if it is a power of
+	// three.
+	public boolean isPowerOfThree(int n) {
+
+		if (n == 0)
+			return false;
+
+		// check if number is completely divisible by 3
+		while (n % 3 == 0) {
+			n = n / 3;
+		}
+
+		if (n == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	// no. of set bits in a number
+	public int hammingWeight(int n) {
+		int count = 0;
+		while (n != 0) {
+			count = count + (n & 1);
+			n = n >>> 1;
+		}
+		return count;
+	}
+
+	// PLUS ONE
+	// Given a non-negative integer represented as a non-empty array of digits,
+	// plus one to the integer.
+	public int[] plusOne(int[] digits) {
+
+		int[] res = new int[digits.length];
+
+		int carry = 1;
+		for (int i = digits.length - 1; i >= 0; i--) {
+
+			res[i] = digits[i] + carry;
+			if (res[i] > 9) {
+				res[i] = res[i] % 10;
+				carry = 1;
+			} else {
+				carry = 0;
+			}
+
+		}
+
+		if (res[0] == 0) {
+			res = new int[digits.length + 1];
+			res[0] = 1;
+			return res;
+		}
+
+		return res;
+	}
+
+	// FACTORIAL TRAILING ZEROS
+	// Given an integer n, return the number of trailing zeroes in n!.
+	// count number of 5 factors in n! expansion
+	public int trailingZeroes(int n) {
+		int count = 0;
+		while (n > 0) {
+			n /= 5;
+			count += n;
+		}
+		return count;
+	}
+
 }

@@ -76,6 +76,100 @@ public class StringTrivial {
 		return new String(strArr);
 	}
 
+	public boolean isAnagram(String s, String t) {
+
+		int[] stg = new int[26];
+
+		for (int i = 0; i < s.length(); i++) {
+			stg[s.charAt(i) - 'a']++;
+		}
+
+		for (int i = 0; i < t.length(); i++) {
+			stg[t.charAt(i) - 'a']--;
+		}
+
+		for (int i = 0; i < stg.length; i++) {
+			if (stg[i] != 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Given a string, find the first non-repeating character in it and return
+	 * it's index. If it doesn't exist, return -1.
+	 * 
+	 * s = "loveleetcode", return 2.
+	 */
+	public int firstUniqChar(String s) {
+
+		int[] stg = new int[26];
+
+		for (int i = 0; i < s.length(); i++) {
+			stg[s.charAt(i) - 'a']++;
+		}
+
+		for (int i = 0; i < s.length(); i++) {
+			if (stg[s.charAt(i) - 'a'] == 1) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	// Longest common prefix
+	// Write a function to find the longest common prefix string amongst an
+	// array of strings.
+	public String longestCommonPrefix(String[] strs) {
+
+		if (strs == null || strs.length == 0)
+			return "";
+
+		StringBuilder prefix = new StringBuilder();
+
+		for (int i = 0; i < strs[0].length(); i++) {
+			char c = strs[0].charAt(i);
+			for (String str : strs) {
+				if (str.length() < i + 1 || c != str.charAt(i)) {
+					return prefix.toString();
+				}
+			}
+			prefix.append(c);
+		}
+		return prefix.toString();
+
+	}
+
+	public boolean isPalindrome(String str) {
+		if (str.isEmpty()) {
+			return true;
+		}
+		String s = str.toLowerCase();
+
+		int i = 0;
+		int j = s.length() - 1;
+		char[] A = s.toCharArray();
+
+		while (i <= j) {
+
+			if (!Character.isLetterOrDigit(A[i])) {
+				i++;
+			}
+			else if (!Character.isLetterOrDigit(A[j])) {
+				j--;
+			} 
+			else {
+				if (A[i] != A[j]) {
+					return false;
+				}
+				i++;
+				j--;
+			}
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 
 		StringTrivial ops = new StringTrivial();

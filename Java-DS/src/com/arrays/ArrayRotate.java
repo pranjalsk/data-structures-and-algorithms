@@ -29,37 +29,7 @@ public class ArrayRotate {
 		array[array.length - 1] = temp;
 	}
 
-	// ----------------------------------------------
-	// Approach 2 -Using Temp Array
-	private static void rotateArrayUsingTmp(int[] array, int k) {
-
-		if (k < 0) {
-			throw new IllegalArgumentException("k cannot be negative!");
-		}
-		if (array == null || array.length < 2) {
-			return;
-		}
-
-		int n = array.length;
-		if (k > n)
-			k = k % n;
-
-		int[] tempArr = new int[k];
-		// step1:copy first k elements to temp arr
-		for (int i = 0; i < k; i++) {
-			tempArr[i] = array[i];
-		}
-		// Step2: shift k to end of arr elements to begining of arr
-		for (int i = k; i < n - 1; i++) {
-			array[i - k] = array[k];
-		}
-		// Step3: copy temp array elements to end of array
-		for (int i = n - k, j = 0; i < n; i++, j++) {
-			array[i] = tempArr[j];
-		}
-	}
-	
-	
+		
 	//Approach 3 - Using Array Reverse
 	private static void rotateArrayUsingReverse(int[] array, int k) {
 		if(k < 0) {
@@ -114,7 +84,6 @@ public class ArrayRotate {
 		int k = 8;
 		System.out.println("Original Array: ");
 		System.out.println(Arrays.toString(array));
-		rotateArrayUsingTmp(array, k);
 		System.out.println("After Rotation " + k + " times using temporary array: ");
 		System.out.println(Arrays.toString(array));
 	}

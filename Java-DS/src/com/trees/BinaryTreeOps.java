@@ -18,6 +18,14 @@ class TreeNode {
 		this.parent = parent;
 	}
 
+	public TreeNode(int val) {
+		super();
+		this.val = val;
+		this.left = null;
+		this.right = null;
+		this.parent = null;
+	}
+
 }
 
 class BinaryTree {
@@ -181,30 +189,30 @@ class BinaryTree {
 		return ht;
 	}
 
-	//BFS-Level traversal
-	//-----------------------------
+	// BFS-Level traversal
+	// -----------------------------
 	public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        
-        while(!q.isEmpty()){
-            ArrayList<Integer> subList = new ArrayList<Integer>();
-            int count = q.size();
-            for(int i=0;i<count;i++){
-                TreeNode node = q.poll();
-                subList.add(node.val);
-                if(node.left != null){
-                    q.add(node.left);
-                }
-                if(node.right != null){
-                    q.add(node.right);
-                }    
-            } 
-            result.add(subList);
-        }
-        return result;     
-    }
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		Queue<TreeNode> q = new LinkedList<>();
+		q.add(root);
+
+		while (!q.isEmpty()) {
+			ArrayList<Integer> subList = new ArrayList<Integer>();
+			int count = q.size();
+			for (int i = 0; i < count; i++) {
+				TreeNode node = q.poll();
+				subList.add(node.val);
+				if (node.left != null) {
+					q.add(node.left);
+				}
+				if (node.right != null) {
+					q.add(node.right);
+				}
+			}
+			result.add(subList);
+		}
+		return result;
+	}
 
 	// --------------------LEVEL TRAVERSAL-----------------------------
 	public void levelOrder() {
@@ -444,9 +452,6 @@ class BinaryTree {
 
 	// Min depth using BFS-----------------------------------
 
-	
-	
-	
 	// COUNTING--------------------------------------------
 	// Count all nodes
 	public void countNodes() {
@@ -542,7 +547,8 @@ class BinaryTree {
 		printLeaf(root.right);
 	}
 
-	// Vertical Order traversal--using BFS+MAP---------------------------------------------
+	// Vertical Order traversal--using
+	// BFS+MAP---------------------------------------------
 	public List<List<Integer>> verticalOrderCaller() {
 		return verticalOrder(root);
 	}
@@ -565,7 +571,7 @@ class BinaryTree {
 		hdq.add(0);
 
 		while (!q.isEmpty()) {
-			//poll the root
+			// poll the root
 			TreeNode curNode = q.poll();
 			Integer hd = hdq.poll();
 
@@ -583,52 +589,54 @@ class BinaryTree {
 			map.putIfAbsent(hd, new ArrayList<Integer>());
 			map.get(hd).add(curNode.val);
 			if (curNode.left != null) {
-				
-				//enqueue left
+
+				// enqueue left
 				q.add(curNode.left);
 				hdq.add(hd - 1);
-				
-				min = Math.min(min, hd - 1); //contains min hd/order in the tree
+
+				min = Math.min(min, hd - 1); // contains min hd/order in the
+												// tree
 			}
 
 			if (curNode.right != null) {
-				
-				//enqueue right
+
+				// enqueue right
 				q.add(curNode.right);
 				hdq.add(hd + 1);
-				
-				max = Math.max(max, hd + 1); //contains max hd/order in the tree
+
+				max = Math.max(max, hd + 1); // contains max hd/order in the
+												// tree
 			}
 		}
-		
-		//-----------
-		//adding result
+
+		// -----------
+		// adding result
 		for (int i = min; i <= max; i++) {
 			res.add(map.get(i));
 		}
 		return res;
 	}
-	
-	
-	//------------------Delete node from BST-----------------
-	public TreeNode getMinimumNode(TreeNode root){
-		if(root == null) return null;
-		if(root.left == null) return root;
+
+	// ------------------Delete node from BST-----------------
+	public TreeNode getMinimumNode(TreeNode root) {
+		if (root == null)
+			return null;
+		if (root.left == null)
+			return root;
 		else
 			return getMinimumNode(root.left);
 	}
-	
-	public TreeNode deleteNode(TreeNode root, int val){
-		if(root == null) return null;
-		
-		//traverse until you find node
-		if(val < root.val){
+
+	public TreeNode deleteNode(TreeNode root, int val) {
+		if (root == null)
+			return null;
+
+		// traverse until you find node
+		if (val < root.val) {
 			root.left = deleteNode(root.left, val);
-		}
-		else if(val > root.val){
+		} else if (val > root.val) {
 			root.right = deleteNode(root.right, val);
-		}
-		else{
+		} else {
 			// if nodeToBeDeleted have both children
 			if (root.left != null && root.right != null) {
 				TreeNode temp = root;
@@ -638,7 +646,7 @@ class BinaryTree {
 				root.val = minNodeForRight.val;
 				// Deleting minimum node from right now
 				deleteNode(root.right, minNodeForRight.val);
- 
+
 			}
 			// if nodeToBeDeleted has only left child
 			else if (root.left != null) {
@@ -650,18 +658,39 @@ class BinaryTree {
 			}
 			// if nodeToBeDeleted do not have child (Leaf node)
 			else
-				root = null;	
+				root = null;
 		}
 		return root;
 	}
-	
-	public void deleteCaller(int val){
+
+	public void deleteCaller(int val) {
 		deleteNode(root, val);
 	}
-	
-	
-	
-	
+
+	// ---------------------
+	/**
+	 * Given an array where elements are sorted in ascending order, convert it
+	 * to a height balanced BST
+	 */
+	public TreeNode sortedArrayToBST(int[] nums) {
+        return sortedArrayToBSThelper(nums,0, nums.length-1);
+    }
+    
+    public TreeNode sortedArrayToBSThelper(int [] nums, int low, int high){
+        
+        if(low > high) return null;
+        
+        if(low == high) return new TreeNode(nums[low]);
+        
+        int mid = low + (high-low)/2;
+        
+        TreeNode root = new TreeNode(nums[mid]);
+        
+        root.left = sortedArrayToBSThelper(nums,low,mid-1);
+        root.right = sortedArrayToBSThelper(nums, mid+1, high);
+        
+        return root;
+    }
 
 }
 
@@ -718,10 +747,10 @@ public class BinaryTreeOps {
 
 		System.out.print("\nVertical order: ");
 		System.out.println(obj.verticalOrderCaller());
-		
+
 		System.out.println("\nDelete node 20: ");
 		obj.deleteCaller(20);
-		
+
 		System.out.println("Inorder:" + obj.recursiveInorder());
 	}
 }
