@@ -45,7 +45,7 @@ public class StringTrivial {
 				i--;
 			} else {
 				out.append(strArr[count]);
-				i -= strArr[count].length();
+				i = i - strArr[count].length();
 				count--;
 			}
 		}
