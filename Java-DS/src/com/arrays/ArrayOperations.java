@@ -1,11 +1,105 @@
 package com.arrays;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 public class ArrayOperations {
 
 	public static void kthlargestElement(int[] arr, int k) {
 
+	}
+
+	/**
+	 * Given an array of n integers where n > 1, nums, return an array output
+	 * such that output[i] is equal to the product of all the elements of nums
+	 * except nums[i].
+	 * 
+	 * Solve it without division and in O(n).
+	 * 
+	 * For example, given [1,2,3,4], return [24,12,8,6].
+	 * 
+	 */
+	// Brute force
+	public int[] productExceptSelf(int[] nums) {
+
+		int[] out = new int[nums.length];
+
+		for (int i = 0; i < nums.length; i++) {
+			int prod = 1;
+
+			for (int j = 0; j < nums.length; j++) {
+				if (j != i) {
+					prod = prod * nums[j];
+				}
+			}
+			out[i] = prod;
+		}
+
+		return out;
+	}
+
+	// divide into left and right multi
+	public int[] productExceptSelf2(int[] nums) {
+		int len = nums.length;
+		int[] output = new int[len];
+
+		int leftMult = 1, rightMult = 1;
+
+		for (int i = len - 1; i >= 0; i--) {
+			output[i] = rightMult;
+			rightMult *= nums[i];
+		}
+		for (int j = 0; j < len; j++) {
+			output[j] *= leftMult;
+			leftMult *= nums[j];
+
+		}
+		return output;
+	}
+
+	/**
+	 * Given a non-empty array of integers, return the k most frequent elements.
+	 * For example, Given [1,1,1,2,2,3] and k = 2, return [1,2]
+	 * 
+	 */
+	public List<Integer> topKFrequent(int[] nums, int k) {
+
+		HashMap<Integer, Integer> map = new HashMap<>();
+		List<Integer> out = new ArrayList<>();
+
+		for (int num : nums) {
+			if (map.containsKey(num)) {
+				int val = map.get(num);
+				map.put(num, val + 1);
+			} else {
+				map.put(num, 1);
+			}
+		}
+		// or use this
+		/*
+		 * for (int num : nums) { map.put(num, map.getOrDefault(num,1)+1); }
+		 */
+
+		Set<Entry<Integer, Integer>> set = map.entrySet();
+		List<Entry<Integer, Integer>> list = new ArrayList<>(set);
+
+		Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+			public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+				return o2.getValue().compareTo(o1.getValue());
+			}
+		});
+
+		int i = 0;
+		for (Entry<Integer, Integer> entry : list) {
+			if (i == k)
+				break;
+			else {
+				out.add(entry.getKey());
+			}
+			i++;
+		}
+
+		return out;
 	}
 
 	// 2nd largest element
