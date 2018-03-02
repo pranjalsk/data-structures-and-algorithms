@@ -1,9 +1,6 @@
 package com.arrays;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class KthLargestInArray {
 
@@ -13,6 +10,7 @@ public class KthLargestInArray {
 	}
 
 	public static int kthlargestElement(int[] nums, int k) {
+		
 		UniquePriorityQueue<Integer> pq = new UniquePriorityQueue<>(Collections.reverseOrder());
 
 		int val = 0;
@@ -31,6 +29,7 @@ public class KthLargestInArray {
 
 }
 
+@SuppressWarnings("serial")
 class UniquePriorityQueue<E> extends PriorityQueue<E> {
 
 	boolean isAdded = false;

@@ -5,10 +5,6 @@ import java.util.Map.Entry;
 
 public class ArrayOperations {
 
-	public static void kthlargestElement(int[] arr, int k) {
-
-	}
-
 	/**
 	 * Given a n x n matrix where each of the rows and columns are sorted in
 	 * ascending order, find the kth smallest element in the matrix.
@@ -106,8 +102,8 @@ public class ArrayOperations {
 		 * for (int num : nums) { map.put(num, map.getOrDefault(num,1)+1); }
 		 */
 
-		Set<Entry<Integer, Integer>> set = map.entrySet();
-		List<Entry<Integer, Integer>> list = new ArrayList<>(set);
+		Set<Map.Entry<Integer, Integer>> set = map.entrySet();
+		List<Map.Entry<Integer, Integer>> list = new ArrayList<>(set);
 
 		Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
 			public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
