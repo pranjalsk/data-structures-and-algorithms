@@ -216,10 +216,10 @@ class BinaryTree {
 
 	// --------------------LEVEL TRAVERSAL-----------------------------
 	public void levelOrder() {
-		/*int ht = heightTree(root);
-		for (int i = 0; i < ht + 1; i++) {
-			breadthWiseTraversal(root, i);
-		}*/
+		/*
+		 * int ht = heightTree(root); for (int i = 0; i < ht + 1; i++) {
+		 * breadthWiseTraversal(root, i); }
+		 */
 		System.out.println(levelOrder(root));
 	}
 
@@ -674,24 +674,60 @@ class BinaryTree {
 	 * to a height balanced BST
 	 */
 	public TreeNode sortedArrayToBST(int[] nums) {
-        return sortedArrayToBSThelper(nums,0, nums.length-1);
-    }
-    
-    public TreeNode sortedArrayToBSThelper(int [] nums, int low, int high){
-        
-        if(low > high) return null;
-        
-        if(low == high) return new TreeNode(nums[low]);
-        
-        int mid = low + (high-low)/2;
-        
-        TreeNode root = new TreeNode(nums[mid]);
-        
-        root.left = sortedArrayToBSThelper(nums,low,mid-1);
-        root.right = sortedArrayToBSThelper(nums, mid+1, high);
-        
-        return root;
-    }
+		return sortedArrayToBSThelper(nums, 0, nums.length - 1);
+	}
+
+	public TreeNode sortedArrayToBSThelper(int[] nums, int low, int high) {
+
+		if (low > high)
+			return null;
+
+		if (low == high)
+			return new TreeNode(nums[low]);
+
+		int mid = low + (high - low) / 2;
+
+		TreeNode root = new TreeNode(nums[mid]);
+
+		root.left = sortedArrayToBSThelper(nums, low, mid - 1);
+		root.right = sortedArrayToBSThelper(nums, mid + 1, high);
+
+		return root;
+	}
+
+	// ----------------zigzagLevelOrder--------
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		ArrayDeque<TreeNode> q = new ArrayDeque<>();
+
+		if (root == null)
+			return result;
+		
+		boolean order = true;
+		q.offer(root);
+
+		while (!q.isEmpty()) {
+			LinkedList<Integer> temp = new LinkedList<Integer>();
+			int size = q.size();
+
+			for (int i = 0; i < size; i++) {
+				TreeNode curr = q.poll();
+				if (order) {
+					temp.add(curr.val);
+				} else {
+					temp.addFirst(curr.val);
+				}
+				if (curr.left != null)
+					q.add(curr.left);
+				if (curr.right != null)
+					q.add(curr.right);
+			}
+			result.add(temp);
+			order = !order;
+		}
+		return result;
+	}
 
 }
 
@@ -727,8 +763,6 @@ public class BinaryTreeOps {
 		System.out.print("Level order:*** ");
 		obj.levelOrder();
 
-
-		
 		System.out.println("\nKth(3) Smallest is:" + obj.kthSmallestCaller(3));
 
 		System.out.println("Is valid BST: " + obj.isValidBSTCaller());

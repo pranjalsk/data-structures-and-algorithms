@@ -1,5 +1,7 @@
 package com.strings;
 
+import java.util.ArrayList;
+
 /*
  * https://www.geeksforgeeks.org/counting-number-lines-words-characters-paragraphs-text-file-using-java/
  * https://www.geeksforgeeks.org/searching-for-character-and-substring-in-a-string/
@@ -175,6 +177,14 @@ public class StringTrivial {
 		StringTrivial ops = new StringTrivial();
 		System.out.println(ops.reverseWordsWithSpaces("the sky     is blue"));
 		System.out.println(ops.reverseWordsInSentence("the sky     is blue"));
+		
+		
+		ArrayList<Integer> k = new ArrayList<>();
+		k.add(23);
+		k.add(65);
+		k.add(0, 77);
+		k.add(0, 99);
+		System.out.println(k);
 
 	}
 }
