@@ -1,4 +1,4 @@
-package com.arrays;
+package com.oop.samples;
 
 public class InheritanceDemo {
 

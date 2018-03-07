@@ -6,32 +6,6 @@ import java.util.Map.Entry;
 public class ArrayOperations {
 
 	/**
-	 * Given a n x n matrix where each of the rows and columns are sorted in
-	 * ascending order, find the kth smallest element in the matrix.
-	 * 
-	 * Note that it is the kth smallest element in the sorted order, not the kth
-	 * distinct element
-	 * 
-	 * @param matrix
-	 * @param k
-	 * @return
-	 */
-	public int kthSmallestInMatrix(int[][] matrix, int k) {
-		PriorityQueue<Integer> pq = new PriorityQueue<>();
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				pq.offer(matrix[i][j]);
-			}
-		}
-		int val = 0;
-		while (!pq.isEmpty() && k != 0) {
-			val = pq.poll();
-			k--;
-		}
-		return val;
-	}
-
-	/**
 	 * Given an array of n integers where n > 1, nums, return an array output
 	 * such that output[i] is equal to the product of all the elements of nums
 	 * except nums[i].
@@ -104,7 +78,6 @@ public class ArrayOperations {
 
 		Set<Map.Entry<Integer, Integer>> set = map.entrySet();
 		List<Map.Entry<Integer, Integer>> list = new ArrayList<>(set);
-		
 
 		Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
 			public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
@@ -543,6 +516,18 @@ public class ArrayOperations {
 			n = n >>> 1;
 		}
 		return count;
+	}
+
+	// hamming distance between two int
+	public int hammingDistance(int x, int y) {
+		int xor = x ^ y;
+		String s = Integer.toBinaryString(xor);
+		int hammingDistance = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '1')
+				hammingDistance++;
+		}
+		return hammingDistance;
 	}
 
 	// PLUS ONE

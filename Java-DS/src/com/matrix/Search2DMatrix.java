@@ -1,4 +1,4 @@
-package com.arrays;
+package com.matrix;
 
 public class Search2DMatrix {
 
