@@ -3,13 +3,14 @@ package com.stacksq;
 import java.util.Stack;
 
 /**
- * Suppose you are at a party with n people (labeled from 0 to n ñ 1) and among
+Credits:https://www.geeksforgeeks.org/the-celebrity-problem/
+ * Suppose you are at a party with n people (labeled from 0 to n ‚Äì 1) and among
  * them, there may exist one celebrity. The definition of a celebrity is that
- * all the other n ñ 1 people know him/her but he/she does not know any of them.
+ * all the other n ‚Äì 1 people know him/her but he/she does not know any of them.
  * 
  * Now you want to find out who the celebrity is or verify that there is not
- * one. The only thing you are allowed to do is to ask questions like: ìHi, A.
- * Do you know B?î to get information of whether A knows B. You need to find out
+ * one. The only thing you are allowed to do is to ask questions like: ‚ÄúHi, A.
+ * Do you know B?‚Äù to get information of whether A knows B. You need to find out
  * the celebrity (or verify there is not one) by asking as few questions as
  * possible (in the asymptotic sense).
  * 
@@ -18,7 +19,7 @@ import java.util.Stack;
  * minimize the number of calls to knows.
  * 
  * Note: There will be exactly one celebrity if he/she is in the party. Return
- * the celebrityís label if there is a celebrity in the party. If there is no
+ * the celebrity‚Äôs label if there is a celebrity in the party. If there is no
  * celebrity, return -1.
  */
 
@@ -52,7 +53,7 @@ public class FindCelebrity {
 	 * stack, discard one person based on return status of HaveAcquaintance(A,
 	 * B). Push the remained person onto stack. Repeat step 2 and 3 until only
 	 * one person remains in the stack. Check the remained person in stack
-	 * doesnít have acquaintance with anyone else.
+	 * doesn‚Äôt have acquaintance with anyone else.
 	 * 
 	 */
 	static int findCelebrity(int n) {
