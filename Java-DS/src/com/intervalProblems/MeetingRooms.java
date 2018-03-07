@@ -1,4 +1,4 @@
-package com.arrays;
+package com.intervalProblems;
 
 import java.util.*;
 
