@@ -44,55 +44,49 @@ public class CourseSchedule {
 	 */
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
 
-		boolean isCycle = false;
 		HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        
+        for(int i= 0;i<numCourses;i++){
+            map.put(i , new ArrayList<Integer>());
+        }
 
 		for (int[] pre : prerequisites) {
-
-			if (map.containsKey(pre[0])) {
 				ArrayList<Integer> valList = map.get(pre[0]);
 				valList.add(pre[1]);
 				map.put(pre[0], valList);
-			} else {
-				ArrayList<Integer> valList = new ArrayList<>();
-				valList.add(pre[1]);
-				map.put(pre[0], valList);
-			}
 		}
-		
+        
 		HashSet<Integer> visited = new HashSet<>();
 		HashSet<Integer> recStack = new HashSet<>();
 		
 		for (Map.Entry<Integer, ArrayList<Integer>> entry : map.entrySet()) {
-
-			Integer key = entry.getKey();
-			ArrayList<Integer> values = entry.getValue();
-			isCycle = isCyclic(key, map, visited, recStack);
+            Integer key = entry.getKey();
+            if(!visited.contains(key)){
+                if(isCyclic(key, map, visited, recStack))
+                    return false; //cycle exists so not possible to finish
+            }
 		
 		}
-		return isCycle;
+		return true;
 	}
-
 	private boolean isCyclic(Integer key, HashMap<Integer, ArrayList<Integer>> map, HashSet<Integer> visited,
 			HashSet<Integer> recStack) {
-		
-		if(!visited.contains(key)){
+
 			visited.add(key);
 			recStack.add(key);
 			
 			ArrayList<Integer> values = map.get(key);
-			
+            
 			for(Integer val : values){
-				
-				if(!visited.contains(val) && isCyclic(val, map, visited, recStack)){
-					return true;
+				if(!visited.contains(val)){
+                    if(isCyclic(val, map, visited, recStack))
+					    return true;
 				}
 				else if(recStack.contains(val)){
 					return true;
 				}
 			}
-		}
-		
+	
 		recStack.remove(key);
 		return false;
 	}
