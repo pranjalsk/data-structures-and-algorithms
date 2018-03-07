@@ -1,4 +1,4 @@
-package wordProblems;
+package com.wordProblems;
 
 public class WordLadder {
 
