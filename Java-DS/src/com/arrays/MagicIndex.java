@@ -3,13 +3,10 @@ package com.arrays;
 public class MagicIndex {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-//https://codesolutiony.wordpress.com/2016/09/20/leetcode-ransom-note/
-		
-	}
 	
-//https://gist.github.com/WOLOHAHA/c84b0b54b9448457e99f
+	}
+
+	// https://codesolutiony.wordpress.com/2016/09/20/leetcode-ransom-note/
 	/**
 	 * A magic index in an arrayA[l…n-l]is defined to be index so that A[i] = i.
 	 * Given a sorted array of distinct integers, write a method to find a magic
@@ -32,25 +29,22 @@ public class MagicIndex {
 	}
 
 	// What if the values are not distinct?
-//	public int findMagicIndexDuplicates(int[] num) {
-//		return subFind(num, 0, num.length - 1);
-//	}
-
-//	private int subFind(int[] num, int start, int end) {
-//	    int result = -1;
-//	    if (start > end) {
-//	        return -1;
-//	    }
-//	    int mid = (start + end) / 2;
-//	    if (num[mid] == mid) {
-//	        return mid;
-//	    }
-//	    if (num[mid] > mid) {
-//	        result = subFind(num, start, mid - 1) == -1 ? result = subFind(num, num[mid], end);
-//	    } else {
-//	        result = subFind(num, mid + 1, end) == -1 ? subFind(num, start, num[mid]);
-//	    }
-//	    return result;
-//	}
+	public int getMagicIndexFollowup(int[] array, int start, int end) {
+		if (end < start || end > array.length - 1 || start < 0)
+			return -1;
+		int midIndex = (end - start) / 2 + start;
+		int midValue = array[midIndex];
+		if (midIndex == midValue)
+			return midIndex;
+		// search left
+		int leftIndex = Math.min(midIndex - 1, midValue);
+		int left = getMagicIndexFollowup(array, start, leftIndex);
+		if (left >= 0)
+			return left;
+		// search right
+		int rightIndex = Math.max(midIndex + 1, midValue);
+		int right = getMagicIndexFollowup(array, rightIndex, end);
+		return right;
+	}
 
 }
