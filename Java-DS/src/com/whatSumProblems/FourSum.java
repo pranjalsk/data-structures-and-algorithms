@@ -55,7 +55,6 @@ public class FourSum {
 			for (int d : D) {
 				int sum = -c - d;
 				if (map.containsKey(sum)) {
-
 					count = count + map.get(sum);
 					System.out.println(sum + "--" + count);
 				}
