@@ -13,11 +13,11 @@ package com.strings;
  * 
  */
 public class URLify {
-	
+
 	public static void main(String[] args) {
-		 char str[] = "Mr John Smith".toCharArray();
-		 replaceSpaces(str);
-		 
+		char str[] = "Mr John Smith".toCharArray();
+		replaceSpaces(str);
+
 	}
 
 	public static void replaceSpaces(char[] str) {
@@ -25,14 +25,12 @@ public class URLify {
 		int len = str.length;
 		int spaceCount = 0;
 		for (int i = 0; i < str.length; i++) {
-			if (str[i] == ' ') {
+			if (str[i] == ' ')
 				spaceCount++;
-			}
 		}
 
-		
 		int newLen = len + spaceCount * 2;
-		char [] newStr = new char[newLen];
+		char[] newStr = new char[newLen];
 
 		for (int i = len - 1; i >= 0; i--) {
 
@@ -40,15 +38,13 @@ public class URLify {
 				newStr[--newLen] = '0';
 				newStr[--newLen] = '2';
 				newStr[--newLen] = '%';
-			} else {
+			} else
 				newStr[--newLen] = str[i];
-			}
 
 		}
-		
-		for(char c : newStr){
+
+		for (char c : newStr)
 			System.out.print(c);
-		}
 	}
 
 }
