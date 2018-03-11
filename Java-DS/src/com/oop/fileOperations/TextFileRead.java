@@ -1,8 +1,9 @@
 package com.oop.fileOperations;
 
 import java.io.*;
+import java.util.ArrayList;
 
-public class StreamFileIO {
+public class TextFileRead {
 
 	private static final String FILENAME = "C:\\Users\\pranj\\Downloads\\data-structures-and-algorithms\\Java-DS\\sample.txt";
 
@@ -13,7 +14,9 @@ public class StreamFileIO {
 		System.out.println("----------");
 		
 		readFileTryWithResources();
+		System.out.println("----------");
 		
+		readFileInputStream();
 	}
 
 	public static void readFileTry() {
@@ -47,17 +50,40 @@ public class StreamFileIO {
 	//Try-with-resources
 	public static void readFileTryWithResources(){
 		
-		StringBuilder sb = new StringBuilder();
+		ArrayList<String> strArr = new ArrayList<>();
+		
 		try(BufferedReader br = new BufferedReader(new FileReader(FILENAME))){
 			String currLine;
 			while((currLine = br.readLine())!=null){
-				sb.append(currLine);
+				strArr.add(currLine);
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		System.out.println(strArr);
+		
+	}
+	
+	//using input stream
+	@SuppressWarnings("deprecation")
+	public static void readFileInputStream(){
+		
+		File file = new File(FILENAME);
+		StringBuilder sb = new StringBuilder();
+		try {
+			
+			DataInputStream br = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
+			
+			String currLine;
+			while ((currLine = br.readLine()) != null) {
+				sb.append(currLine);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		System.out.println(sb.toString());
 		
 	}
