@@ -26,7 +26,6 @@ public class TextFileWrite {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-
 			// get the content in bytes
 			byte[] contentInBytes = content.getBytes();
 
@@ -44,21 +43,16 @@ public class TextFileWrite {
 	// ------------- BufferedWriter
 	public static void writeBufferedTryResources(String content) {
 
-		//true means append content to end of file.
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILEPATH,true))) {
-
+		// true means append content to end of file.
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILEPATH, true))) {
 			bw.write(content);
-
 			// no need to close it.
 			// bw.close();
 			System.out.println("Done");
 
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 	}
 
 }
