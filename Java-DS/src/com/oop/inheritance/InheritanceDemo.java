@@ -1,4 +1,4 @@
-package com.oop.samples;
+package com.oop.inheritance;
 
 public class InheritanceDemo {
 
@@ -34,11 +34,12 @@ public class InheritanceDemo {
 		// Exception in thread "main" java.lang.ClassCastException: Parent
 		// cannot be cast to Child
 		// at InheriDemo.main(InheriDemo.java:31)
-		Child cp = (Child) new Parent();
+		//class cast exception
+		/*Child cp = (Child) new Parent();
 		cp.pMethod1();
 		cp.pMethod2();
 		cp.cMethod1();
-
+		 */
 	}
 
 }
