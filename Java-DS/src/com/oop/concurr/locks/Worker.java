@@ -2,6 +2,7 @@ package com.oop.concurr.locks;
 
 import java.util.ArrayList;
 import java.util.Random;
+//credits: cave of programming
 
 public class Worker {
 
@@ -15,13 +16,11 @@ public class Worker {
 	public static void stageOne(){
 		
 		synchronized (lock1) {
-
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
 			list1.add(random.nextInt(100));	
 		}
 	}
@@ -43,7 +42,6 @@ public class Worker {
 			stageTwo();
 		}
 	}
-	
 	
 	public static void main(String[] args) {
 		
@@ -73,7 +71,6 @@ public class Worker {
 			t1.join();
 			t2.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -82,9 +79,5 @@ public class Worker {
 		System.out.println("Duration: "+ (end-start));
 		System.out.println("List1: "+list1.size());
 		System.out.println("List2: "+list2.size());
-		
-		
 	}
-	
-	
 }
