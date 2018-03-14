@@ -1,6 +1,6 @@
 package com.strings;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /*
  * https://www.geeksforgeeks.org/counting-number-lines-words-characters-paragraphs-text-file-using-java/
@@ -98,6 +98,67 @@ public class StringTrivial {
 		return true;
 	}
 
+	// Brute force group anagrams
+	public List<List<String>> groupAnagrams(String[] strs) {
+
+		List<List<String>> res = new ArrayList<List<String>>();
+
+		boolean[] checked = new boolean[strs.length];
+
+		for (int i = 0; i < strs.length; i++) {
+
+			if (checked[i] == false) {
+
+				List<String> inner = new ArrayList<>();
+				inner.add(strs[i]);
+				checked[i] = true;
+				for (int j = 1; j < strs.length; j++) {
+
+					if (checked[j] == false) {
+						if (isAnagram(strs[i], strs[j])) {
+							inner.add(strs[j]);
+							checked[j] = true;
+						}
+					}
+				}
+				res.add(inner);
+			}
+		}
+		return res;
+	}
+
+	//better approach
+	public List<List<String>> groupAnagrams2(String[] strs) {
+
+		List<List<String>> res = new ArrayList<List<String>>();
+
+		HashMap<String, List<String>> map = new HashMap<>();
+
+		for (String str : strs) {
+
+			char[] charArr = str.toCharArray();
+			Arrays.sort(charArr);
+
+			String key = new String(charArr);
+
+			List<String> temp;
+			if (map.containsKey(key)) {
+				temp = map.get(key);
+			} else {
+				temp = new ArrayList<>();
+			}
+			temp.add(str);
+			map.put(key, temp);
+
+		}
+
+		for (List<String> temp : map.values()) {
+			res.add(temp);
+		}
+
+		return res;
+	}
+
 	/**
 	 * Given a string, find the first non-repeating character in it and return
 	 * it's index. If it doesn't exist, return -1.
@@ -157,11 +218,9 @@ public class StringTrivial {
 
 			if (!Character.isLetterOrDigit(A[i])) {
 				i++;
-			}
-			else if (!Character.isLetterOrDigit(A[j])) {
+			} else if (!Character.isLetterOrDigit(A[j])) {
 				j--;
-			} 
-			else {
+			} else {
 				if (A[i] != A[j]) {
 					return false;
 				}
@@ -177,8 +236,7 @@ public class StringTrivial {
 		StringTrivial ops = new StringTrivial();
 		System.out.println(ops.reverseWordsWithSpaces("the sky     is blue"));
 		System.out.println(ops.reverseWordsInSentence("the sky     is blue"));
-		
-		
+
 		ArrayList<Integer> k = new ArrayList<>();
 		k.add(23);
 		k.add(65);
