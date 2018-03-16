@@ -129,3 +129,6 @@ class MaxAreaIsland {
 		clearOff(grid, i, j - 1, m, n, currArea);
 	}
 }
+
+
+//max perimeter of an island

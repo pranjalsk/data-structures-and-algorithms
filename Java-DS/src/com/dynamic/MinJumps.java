@@ -29,3 +29,4 @@ public class MinJumps {
 		return minJumpArr[n - 1];
 	}
 }
+
