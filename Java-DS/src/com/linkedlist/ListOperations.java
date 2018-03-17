@@ -368,40 +368,65 @@ public class ListOperations {
 		return dummy.next;
 	}
 
-	
-	
-	//find max in list
-	public int findMax(){
+	// find max in list
+	public int findMax() {
 		return maxValue(head);
 	}
-	
-	public int maxValue(ListNode head){
-		
-		if(head == null) throw new IllegalArgumentException();
-		if(head.next == null) return head.val;
-		
+
+	public int maxValue(ListNode head) {
+
+		if (head == null)
+			throw new IllegalArgumentException();
+		if (head.next == null)
+			return head.val;
+
 		ListNode curr = head;
 		int max = curr.val;
-		while(curr != null){
+		while (curr != null) {
 			max = Math.max(max, curr.val);
 			curr = curr.next;
 		}
-		
+
 		return max;
 	}
-	
-	
-	//Print reverse linkedlist RECCURSIVELY
-	public void printInRev(){
+
+	// Print reverse linkedlist RECCURSIVELY
+	public void printInRev() {
 		printRev(head);
 	}
-	
-	public void printRev(ListNode head){
+
+	public void printRev(ListNode head) {
 		ListNode curr = head;
-		if(curr==null)
-            return;
-        printRev(curr.next);
-        System.out.print(curr.val+" ");
+		if (curr == null)
+			return;
+		printRev(curr.next);
+		System.out.print(curr.val + " ");
+	}
+
+	// reverse nodes in a group of k
+	/**
+	 * Given a linked list, reverse the nodes of a linked list k at a time and
+	 * return its modified list.
+	 * 
+	 * k is a positive integer and is less than or equal to the length of the
+	 * linked list. If the number of nodes is not a multiple of k then left-out
+	 * nodes in the end should remain as it is.
+	 * 
+	 * You may not alter the values in the nodes, only nodes itself may be
+	 * changed.
+	 * 
+	 * Only constant memory is allowed.
+	 * 
+	 * For example, Given this linked list: 1->2->3->4->5
+	 * 
+	 * For k = 2, you should return: 2->1->4->3->5
+	 * 
+	 * For k = 3, you should return: 3->2->1->4->5
+	 * 
+	 */
+	//HARD Leetcode - 25
+	public ListNode reverseKGroup(ListNode head, int k) {
+        return null;
     }
-	
+
 }
