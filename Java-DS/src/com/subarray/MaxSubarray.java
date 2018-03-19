@@ -1,4 +1,4 @@
-package com.arrays;
+package com.subarray;
 
 public class MaxSubarray {
 
