@@ -1,4 +1,4 @@
-package com.arrays;
+package com.strings;
 
 public class LongestSubstring {
 
