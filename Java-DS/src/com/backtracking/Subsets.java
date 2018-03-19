@@ -19,10 +19,16 @@ public class Subsets {
 			tempList.add(nums[i]);
 			subsetBacktrack(result, tempList, nums, i+1);
 			tempList.remove(tempList.size()-1);
-			
 		}
-		
 	}
 	
+	
+	public static void main(String[] args) {
+		
+		List<List<Integer>> res = new Subsets().subsets(new int[]{1,2,3});
+		
+		System.out.println(res);
+		
+	}
 
 }
