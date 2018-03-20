@@ -313,25 +313,32 @@ public class ListOperations {
 		if (l2 == null)
 			return l1;
 
-		ListNode head = new ListNode(0);
-		ListNode p = head;
+		ListNode dummy = new ListNode(0);
+		ListNode p = dummy;
+		int carry = 0;
 
-		int tempSum = 0;
-		while (l1 != null || l2 != null || tempSum != 0) {
+		while (l1 != null || l2 != null) {
 			if (l1 != null) {
-				tempSum += l1.val;
+				carry += l1.val;
 				l1 = l1.next;
 			}
 			if (l2 != null) {
-				tempSum += l2.val;
+				carry += l2.val;
 				l2 = l2.next;
 			}
 
-			p.next = new ListNode(tempSum % 10);
+			int sum = carry % 10;
+			carry = carry / 10;
+
+			p.next = new ListNode(sum);
 			p = p.next;
-			tempSum = tempSum / 10;
 		}
-		return head.next;
+
+		if (carry != 0) {
+			p.next = new ListNode(carry);
+		}
+
+		return dummy.next;
 	}
 
 	/**
@@ -424,9 +431,9 @@ public class ListOperations {
 	 * For k = 3, you should return: 3->2->1->4->5
 	 * 
 	 */
-	//HARD Leetcode - 25
+	// HARD Leetcode - 25
 	public ListNode reverseKGroup(ListNode head, int k) {
-        return null;
-    }
+		return null;
+	}
 
 }
