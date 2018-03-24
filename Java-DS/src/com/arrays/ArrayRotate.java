@@ -71,7 +71,7 @@ public class ArrayRotate {
 
 	private static void testArrayRotationNaive() {
 		int[] array = { 1, 2, 3, 4, 5 };
-		int k = 8;
+		int k = 1;
 		System.out.println("Original Array: ");
 		System.out.println(Arrays.toString(array));
 		rotateArrayNaive(array, k);
@@ -90,7 +90,7 @@ public class ArrayRotate {
 
 	private static void testArrayRotationReverse() {
 		int[] array = { 1, 2, 3, 4, 5 };
-		int k = 8;
+		int k = 2;
 		System.out.println("Original Array: ");
 		System.out.println(Arrays.toString(array));
 		rotateArrayUsingReverse(array, k);
