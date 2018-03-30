@@ -10,7 +10,6 @@ Longest common substring
 Longest Increasing Subsequence
 Longest palindromic subsequence
 Longest palimdromic substring
-Longest Substring Without Repeating Characters
 */
 
 public class Subsequences {
@@ -83,34 +82,7 @@ public class Subsequences {
 		System.out.println("Substring is: " + substr);
 	}
 
-	// Longest Substring without repeating characters
-	// e.g.Given "pwwkew", the answer is "wke", with the length of 3. Note that
-	// answer must be a substring, "pwke" is a subsequence and not a substring.
-	// Brute force - find all substring and check if they are unique
-	public static String longestNonrepeatingSubstring(String str) {
-		String longestSubstring = "";
-		for (int i = 0; i < str.length(); i++) {
-			for (int j = i; j < str.length(); j++) {
-				if (hasRepeatingChar(str, i, j)) {
-					break;
-				} else if ((longestSubstring.length() - 1) < (j - i)) {
-					longestSubstring = str.substring(i, j + 1);
-				}
-			}
-		}
-		return longestSubstring;
-	}
-
-	public static boolean hasRepeatingChar(String str, int s, int e) {
-		HashSet<Character> hs = new HashSet<>();
-		for (int i = s; i <= e; i++) {
-			if (hs.contains(str.charAt(i))) {
-				return true;
-			}
-			hs.add(str.charAt(i));
-		}
-		return false;
-	}
+	
 
 	// ----------------------------------------------------
 	// Longest increasing subsequence
