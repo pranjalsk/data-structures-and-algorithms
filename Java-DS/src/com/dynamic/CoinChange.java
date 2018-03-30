@@ -9,7 +9,7 @@ import java.util.Arrays;
  * job scheduling
  */
 
-public class DynamicProblems {
+public class CoinChange {
 
 	// coin change problem
 	// *Must watch: https://www.youtube.com/watch?v=jaNZ83Q3QGc
@@ -19,7 +19,7 @@ public class DynamicProblems {
 		int[] combination = new int[amount + 1];
 
 		combination[0] = 1;
-
+		
 		for (int coin : coins) {
 			for (int amt = 1; amt < combination.length; amt++) {
 				if (amt >= coin) {
