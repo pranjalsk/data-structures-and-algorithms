@@ -2,7 +2,6 @@ package com.dynamic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 /*
 Longest Common Subsequence

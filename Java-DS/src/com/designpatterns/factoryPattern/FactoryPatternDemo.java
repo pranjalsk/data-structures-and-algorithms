@@ -30,7 +30,7 @@ class MyComputerfactory {
  * a normal java class
  */
 abstract class MyComputer {
-
+	
 	public abstract String getRAM();
 
 	public abstract String getHDD();
