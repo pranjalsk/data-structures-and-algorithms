@@ -3,6 +3,8 @@ package com.trees;
 import java.util.*;
 import java.util.logging.Level;
 
+import javax.swing.text.html.MinimalHTMLWriter;
+
 //BT node data structure
 class TreeNode {
 	int val;
@@ -416,7 +418,7 @@ class BinaryTree {
 		while (!stack.isEmpty()) {
 			TreeNode curr = stack.pop();
 			System.out.print(curr.val + " ");
-			;
+	
 			if (curr.left != null) {
 				stack.push(curr.left);
 			}
@@ -789,5 +791,13 @@ public class BinaryTreeOps {
 		obj.deleteCaller(20);
 
 		System.out.println("Inorder:" + obj.recursiveInorder());
+		
+		System.out.println("------------Minimal Tree-------------");
+		BinaryTreeExtra objBTE = new BinaryTreeExtra();
+		int [] arr =new int[]{2,7,9,12,16,19};
+		TreeNode rootOfMinimalTree = objBTE.createMinimalSubtree(arr,0,arr.length-1);
+		ArrayList<Integer> mininalTraversal = new ArrayList<>();
+		obj.inorder(rootOfMinimalTree, mininalTraversal);
+		System.out.println(mininalTraversal);
 	}
 }

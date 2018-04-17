@@ -16,7 +16,7 @@ public class CallableDemo {
 		
 		ExecutorService executor =  Executors.newCachedThreadPool();
 		
-		Future<Integer> future =executor.submit(new Callable<Integer>() {
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
 			
 			@Override
 			public Integer call() throws Exception {

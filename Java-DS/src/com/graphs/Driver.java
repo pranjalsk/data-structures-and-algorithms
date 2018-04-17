@@ -60,6 +60,12 @@ public class Driver {
 	        HashSet<Vertex> blackSet = new HashSet<>();
 	        boolean hasCycle = obj.hasCycle(whiteSet, graySet, blackSet);
 	        System.out.print("\nHas cycle: "+ hasCycle);
+	        
+	        System.out.println("----has path----");
+	        boolean hasPath = obj.hasPath(node10, node60);
+	        System.out.println("HasPath 10 to 60?:"+ hasPath);
+	        
+	        
 	}
 
 }

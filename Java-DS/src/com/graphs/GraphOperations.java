@@ -1,5 +1,6 @@
 package com.graphs;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -135,7 +136,30 @@ public class GraphOperations {
 	//----------------------------------------------
 	
 	
-	
-	
+	//check if there is a path between two nodes
+	public boolean hasPath(Vertex a, Vertex b){
+		
+		ArrayDeque<Vertex> q = new ArrayDeque<>();
+		HashSet<Vertex> visited = new HashSet<>();
+		
+		q.offer(a);
+		while(!q.isEmpty()){
+			
+			Vertex curr = q.poll();
+			
+			if(curr.equals(b))
+				return true;
+			
+			ArrayList<Vertex> neighbors = curr.getneighbours();
+			for(Vertex neighbor : neighbors){
+				if(neighbor!=null && !visited.contains(neighbor)){
+					visited.add(neighbor);
+					q.offer(neighbor);
+				}
+			}
+		}
+		return false;	
+	}
+		
 	
 }
