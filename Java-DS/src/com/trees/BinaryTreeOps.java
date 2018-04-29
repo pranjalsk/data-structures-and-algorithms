@@ -126,7 +126,7 @@ class BinaryTree {
 		ArrayDeque<TreeNode> stack = new ArrayDeque<>();
 		ArrayList<Integer> result = new ArrayList<>();
 		TreeNode curr = root;
-
+		
 		while (curr != null || !stack.isEmpty()) {
 			while (curr != null) {
 				stack.push(curr);
@@ -241,6 +241,7 @@ class BinaryTree {
 	// Find Kth smallest element -- inorder gives us sorted order
 	public int kthSmallest(TreeNode node, int k) {
 		ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+		HashSet<Integer> set = new HashSet<>();
 		if (node == null)
 			return 0;
 		int count = 0;
@@ -250,7 +251,13 @@ class BinaryTree {
 				node = node.left;
 			}
 			node = stack.pop();
-			count++;
+			
+			//to handle duplicates ... if BT contains duplicates
+			if(!set.contains(node.val)){
+				count++;
+			}
+			set.add(node.val);	
+			
 			if (count == k) {
 				break;
 			}
@@ -264,24 +271,24 @@ class BinaryTree {
 	}
 
 	// --Validate BST----------------------------------------//Tip: Use inorder
-	public boolean isValidBST(TreeNode node) {
+	public boolean isValidBST(TreeNode root) {
 		ArrayDeque<TreeNode> stack = new ArrayDeque<>();
-		if (node == null)
+		if (root == null)
 			return true;
 		// maintain prev pointer
 		TreeNode prev = null;
-		while (node != null || !stack.isEmpty()) {
-			while (node != null) {
-				stack.push(node);
-				node = node.left;
+		while (root != null || !stack.isEmpty()) {
+			while (root != null) {
+				stack.push(root);
+				root = root.left;
 			}
-			node = stack.pop();
-			if (prev != null && node.val <= prev.val) { // breaking condition
+			root = stack.pop();
+			if (prev != null && root.val <= prev.val) { // breaking condition
 				return false;
 			}
 			// increment pointers
-			prev = node;
-			node = node.right;
+			prev = root;
+			root = root.right;
 		}
 		return true;
 	}
@@ -290,7 +297,7 @@ class BinaryTree {
 		return isValidBST(root);
 	}
 
-	// Path sum : In a BT, check whether there is a a "root-to-leaf path" with
+	// Path sum : In a BT, check whether there is a "root-to-leaf path" with
 	// sum = target
 	public boolean hasPathSum(TreeNode root, int sum) {
 		if (root == null)
@@ -436,21 +443,18 @@ class BinaryTree {
 	// Recursive
 	public int minDepth(TreeNode root) {
 
-		if (root == null)
-			return 0;
-
-		int depth = 0;
-		if (root.left != null && root.right != null) {
-			int lh = minDepth(root.left);
-			int rh = minDepth(root.right);
-			depth = Math.min(lh, rh);
-		} else if (root.left != null && root.right == null) {
-			depth = minDepth(root.left);
-		} else if (root.right != null && root.left == null) {
-			depth = minDepth(root.right);
-		}
-
-		return depth + 1;
+		if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+        if (root.left == null) return 1 + minDepth(root.right);
+        if (root.right == null) return 1 + minDepth(root.left);
+        return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+        
+        /*
+         * if(root == null) return 0;
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+        return (left == 0 || right == 0) ? left + right + 1: Math.min(left,right) + 1;
+         */
 	}
 
 	// Min depth using BFS-----------------------------------
