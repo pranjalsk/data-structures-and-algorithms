@@ -63,6 +63,9 @@ public class LongestSubstringNonRepeat {
 		}
 		return false;
 	}
+	
+	
+	
 
 	public static void main(String[] args) {
 		String str = "ABCDABDEFGCABD";
