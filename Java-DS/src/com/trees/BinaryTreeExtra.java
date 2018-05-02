@@ -30,7 +30,7 @@ public class BinaryTreeExtra {
 		}
 
 		TreeNode succ = null;
-		// traverse tree from room and compare values
+		// traverse tree from root and compare values
 		while (root != null) {
 			if (node.val > root.val)  // succ will definately be in right tree
 				root = root.right;

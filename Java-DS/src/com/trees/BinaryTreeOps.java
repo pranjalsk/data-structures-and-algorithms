@@ -536,9 +536,9 @@ class BinaryTree {
 			return;
 
 		if (root.right == null) {
-			printLeftEdge(root.left);
+			printRightEdge(root.left);
 		} else {
-			printLeftEdge(root.right);
+			printRightEdge(root.right);
 		}
 		System.out.print(root.val + " ");
 	}

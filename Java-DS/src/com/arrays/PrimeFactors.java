@@ -10,7 +10,7 @@ public class PrimeFactors {
 
 		PrimeFactors pm = new PrimeFactors();
 
-		pm.findPrimeFactors(2);
+		pm.findPrimeFactors(200);
 
 	}
 
