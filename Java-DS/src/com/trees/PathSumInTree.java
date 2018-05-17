@@ -2,6 +2,7 @@ package com.trees;
 
 import java.util.ArrayDeque;
 
+//number of path between any two nodes equal to sum
 public class PathSumInTree {
 
 	public int pathSum(TreeNode root, int sum) {

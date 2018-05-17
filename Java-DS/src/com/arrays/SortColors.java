@@ -13,7 +13,7 @@ public class SortColors {
 	 */
 	public void sortColors(int[] nums) {
 
-		//count red, blue and white balls, and modify the array susequently
+		//count red, blue and white balls, and modify the array subsequently
 		
 		int num0 = 0;
 		int num1 = 0;

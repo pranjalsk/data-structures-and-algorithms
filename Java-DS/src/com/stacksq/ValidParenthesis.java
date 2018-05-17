@@ -67,5 +67,17 @@ public class ValidParenthesis {
 	public List<String> generateParenthesis(int n) {
 		return null;
 	}
+	
+	public boolean isValid2(String s) {
+		while (s.contains("()") || s.contains("[]") || s.contains("{}")) {
+			s = s.replace("()", "");
+			s = s.replace("[]", "");
+			s = s.replace("{}", "");
+		}
+		if (s.length() == 0)
+			return true;
+		else
+			return false;
+	}
 
 }

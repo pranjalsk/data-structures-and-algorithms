@@ -41,6 +41,7 @@ public class StringTrivial {
 		StringBuilder out = new StringBuilder();
 		int n = s.length();
 		int count = strArr.length - 1;
+		
 		for (int i = n - 1; i >= 0;) {
 			if (s.charAt(i) == ' ') {
 				out.append(" ");
